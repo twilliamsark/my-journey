@@ -1,0 +1,7 @@
+{
+  "name": "my-journey",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
