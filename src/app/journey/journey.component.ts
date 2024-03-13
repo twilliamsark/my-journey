@@ -37,7 +37,7 @@ import { JourneyListComponent } from './ui/journey-list.component';
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content fullscreen="true">
+    <ion-content fullscreen="true" color="burlywood">
       <app-journey-list [journeys]="service.journeys()"></app-journey-list>
     </ion-content>
   `,

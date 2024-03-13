@@ -17,12 +17,19 @@ import { cog, pencil } from 'ionicons/icons';
   imports: [IonAccordion, IonItem, IonLabel, IonIcon, IonButton],
   styles: `
     div[slot='content'] {
-      background: rgba(var(--ion-color-rose-rgb), 0.25);
+      color: var(--ion-color-blanchedalmond);
+      background: rgba(var(--ion-color-blanchedalmond-rgb), 0.25);
+    }
+
+    ion-accordion {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
   `,
   template: `
     <ion-accordion [value]="journey.id">
-      <ion-item slot="header" color="rose">
+      <ion-item slot="header" color="blanchedalmond">
         <ion-label>
           <h2>{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>

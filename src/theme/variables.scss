@@ -82,6 +82,22 @@
   --ion-color-rose-contrast-rgb: 0, 0, 0;
   --ion-color-rose-shade: #e0b4ba;
   --ion-color-rose-tint: #fed2d7;
+
+  /** burlywood **/
+  --ion-color-burlywood: #deb887;
+  --ion-color-burlywood-rgb: 222, 184, 135;
+  --ion-color-burlywood-contrast: #000000;
+  --ion-color-burlywood-contrast-rgb: 0, 0, 0;
+  --ion-color-burlywood-shade: #c3a277;
+  --ion-color-burlywood-tint: #e1bf93;
+
+  /** blanchedalmond **/
+  --ion-color-blanchedalmond: #ffebcd;
+  --ion-color-blanchedalmond-rgb: 255, 235, 205;
+  --ion-color-blanchedalmond-contrast: #000000;
+  --ion-color-blanchedalmond-contrast-rgb: 0, 0, 0;
+  --ion-color-blanchedalmond-shade: #e0cfb4;
+  --ion-color-blanchedalmond-tint: #ffedd2;
 }
 
 .ion-color-rose {
@@ -91,6 +107,24 @@
   --ion-color-contrast-rgb: var(--ion-color-rose-contrast-rgb);
   --ion-color-shade: var(--ion-color-rose-shade);
   --ion-color-tint: var(--ion-color-rose-tint);
+}
+
+.ion-color-burlywood {
+  --ion-color-base: var(--ion-color-burlywood);
+  --ion-color-base-rgb: var(--ion-color-burlywood-rgb);
+  --ion-color-contrast: var(--ion-color-burlywood-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-burlywood-contrast-rgb);
+  --ion-color-shade: var(--ion-color-burlywood-shade);
+  --ion-color-tint: var(--ion-color-burlywood-tint);
+}
+
+.ion-color-blanchedalmond {
+  --ion-color-base: var(--ion-color-blanchedalmond);
+  --ion-color-base-rgb: var(--ion-color-blanchedalmond-rgb);
+  --ion-color-contrast: var(--ion-color-blanchedalmond-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-blanchedalmond-contrast-rgb);
+  --ion-color-shade: var(--ion-color-blanchedalmond-shade);
+  --ion-color-tint: var(--ion-color-blanchedalmond-tint);
 }
 
 @media (prefers-color-scheme: dark) {
