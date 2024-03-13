@@ -4,7 +4,7 @@ import {
   toTypedRxJsonSchema,
 } from 'rxdb';
 
-const journeySchemaLiteral = {
+export const journeysSchemaLiteral = {
   version: 0,
   primaryKey: 'id',
   type: 'object',
@@ -20,22 +20,19 @@ const journeySchemaLiteral = {
     title: {
       type: 'string',
     },
-    text: {
+    note: {
       type: 'string',
     },
   },
-  required: ['id', 'createdOn', 'title', 'text'],
+  required: ['id', 'title'],
 } as const;
-const schemaTyped = toTypedRxJsonSchema(journeySchemaLiteral);
+const schemaTyped = toTypedRxJsonSchema(journeysSchemaLiteral);
 export type Journey = ExtractDocumentTypeFromTypedRxJsonSchema<
   typeof schemaTyped
 >;
-export const journeySchema: RxJsonSchema<Journey> = journeySchemaLiteral;
+export const journeysSchema: RxJsonSchema<Journey> = journeysSchemaLiteral;
 
-export type AddJourney = Omit<Journey, 'id' | 'createdOn'>;
-export type ViewJourney = Omit<Journey, 'id'>;
-export type EditJourney = {
-  id: Journey['id'];
-  data: AddJourney;
-};
-export type RemoveJourney = Journey['id'];
+export type JourneyId = Journey['id'];
+export type AddJourney = Pick<Journey, 'title' | 'note'>;
+export type EditJourney = { id: Journey['id']; data: AddJourney };
+export type RemoveJourney = JourneyId;

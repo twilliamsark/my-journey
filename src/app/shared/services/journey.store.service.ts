@@ -1,6 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { AddJourney, Journey } from '../interfaces/journey';
-import { newId } from '../utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 export interface JourneyState {
   journeys: Journey[];
@@ -11,24 +12,33 @@ export interface JourneyState {
 export class JourneyStoryService {
   private state = signal<JourneyState>({
     journeys: [
-      this.addId({
-        title: '1st step',
-        text: 'Something to journal on is what you have accomplished — goals you set or some that might have surprised you (like scuba diving), how you felt within and after those accomplishments and what else you have to achieve in life.',
+      this.initAdd({ title: '1st step' }),
+      this.initAdd({
+        title: '2nd step',
+        note: 'Something to journal on is what you have accomplished — goals you set or some that might have surprised you (like scuba diving), how you felt within and after those accomplishments and what else you have to achieve in life.',
       }),
     ],
     error: '',
   });
 
+  add$ = new Subject<AddJourney>();
   journeys = computed(() => this.state().journeys);
 
-  private addId(journey: AddJourney): Journey {
+  constructor() {
+    this.add$.pipe(takeUntilDestroyed()).subscribe((journey) =>
+      this.state.update((state) => ({
+        ...state,
+        journeys: [...state.journeys, { ...this.initAdd(journey) }],
+      })),
+    );
+  }
+
+  private initAdd(journey: AddJourney) {
     const time = new Date();
-    const id = time.getTime().toString();
-    const createdOn = time.toISOString();
 
     return {
-      id,
-      createdOn,
+      id: time.getTime().toString(),
+      createdOn: time.toISOString(),
       ...journey,
     };
   }
