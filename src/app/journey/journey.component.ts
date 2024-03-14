@@ -28,7 +28,7 @@ import { JourneyListComponent } from './ui/journey-list.component';
   ],
   template: `
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="blanchedalmond">
         <ion-title>My Journey</ion-title>
         <ion-buttons slot="end">
           <ion-button>

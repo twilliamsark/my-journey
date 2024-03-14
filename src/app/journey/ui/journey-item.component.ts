@@ -9,7 +9,7 @@ import {
 } from '@ionic/angular/standalone';
 import { formatDate } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { cog, pencil } from 'ionicons/icons';
+import { cogOutline, pencil } from 'ionicons/icons';
 
 @Component({
   standalone: true,
@@ -17,7 +17,7 @@ import { cog, pencil } from 'ionicons/icons';
   imports: [IonAccordion, IonItem, IonLabel, IonIcon, IonButton],
   styles: `
     div[slot='content'] {
-      color: var(--ion-color-blanchedalmond);
+      color: var(--ion-color-blanchedalmond-contrast);
       background: rgba(var(--ion-color-blanchedalmond-rgb), 0.25);
     }
 
@@ -35,7 +35,7 @@ import { cog, pencil } from 'ionicons/icons';
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
         <ion-button fill="clear" slot="end">
-          <ion-icon slot="icon-only" name="cog"></ion-icon>
+          <ion-icon slot="icon-only" name="cog-outline" color="dark"></ion-icon>
         </ion-button>
       </ion-item>
       <div class="ion-padding" slot="content">{{ journey.note }}</div>
@@ -50,6 +50,6 @@ export class JourneyItemComponent {
   }
 
   constructor() {
-    addIcons({ cog, pencil });
+    addIcons({ cogOutline, pencil });
   }
 }
