@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular/standalone';
 import { Journey } from 'src/app/shared/interfaces/journey';
 import { JourneyItemComponent } from './journey-item.component';
@@ -15,11 +15,19 @@ import { JourneyItemComponent } from './journey-item.component';
       [value]="journeys[0].id"
     >
       @for (journey of journeys; track journey.id) {
-        <app-journey-item [journey]="journey"></app-journey-item>
+        <app-journey-item
+          [journey]="journey"
+          (edit)="editTriggered($event)"
+        ></app-journey-item>
       }
     </ion-accordion-group>
   `,
 })
 export class JourneyListComponent {
   @Input({ required: true }) journeys!: Journey[];
+  @Output() edit = new EventEmitter<Journey>();
+
+  editTriggered(journey: Journey) {
+    this.edit.emit(journey);
+  }
 }

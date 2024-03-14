@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Journey } from 'src/app/shared/interfaces/journey';
 import {
   IonAccordion,
@@ -34,7 +34,11 @@ import { cogOutline, pencil } from 'ionicons/icons';
           <h2>{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
-        <ion-button fill="clear" slot="end">
+        <ion-button
+          fill="clear"
+          slot="end"
+          (click)="$event.stopPropagation(); $event.preventDefault(); onEdit()"
+        >
           <ion-icon slot="icon-only" name="cog-outline" color="dark"></ion-icon>
         </ion-button>
       </ion-item>
@@ -44,6 +48,11 @@ import { cogOutline, pencil } from 'ionicons/icons';
 })
 export class JourneyItemComponent {
   @Input({ required: true }) journey!: Journey;
+  @Output() edit = new EventEmitter<Journey>();
+
+  onEdit() {
+    this.edit.emit(this.journey);
+  }
 
   createdOn(journey: Journey) {
     return formatDate(journey.createdOn || Date.now(), 'medium', 'en-US');

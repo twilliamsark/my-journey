@@ -12,6 +12,7 @@ import { addIcons } from 'ionicons';
 import { addCircleOutline } from 'ionicons/icons';
 import { JourneyStoryService } from '../shared/services/journey.store.service';
 import { JourneyListComponent } from './ui/journey-list.component';
+import { Journey } from '../shared/interfaces/journey';
 
 @Component({
   selector: 'app-journey',
@@ -38,7 +39,10 @@ import { JourneyListComponent } from './ui/journey-list.component';
       </ion-toolbar>
     </ion-header>
     <ion-content fullscreen="true" color="burlywood">
-      <app-journey-list [journeys]="service.journeys()"></app-journey-list>
+      <app-journey-list
+        [journeys]="service.journeys()"
+        (edit)="editJourney($event)"
+      ></app-journey-list>
     </ion-content>
   `,
 })
@@ -47,5 +51,9 @@ export class JourneyComponent {
 
   constructor() {
     addIcons({ addCircleOutline });
+  }
+
+  editJourney(journey: Journey) {
+    console.log(journey);
   }
 }
