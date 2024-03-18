@@ -31,7 +31,7 @@ import { cogOutline, pencil } from 'ionicons/icons';
     <ion-accordion [value]="journey.id">
       <ion-item slot="header" color="blanchedalmond">
         <ion-label>
-          <h2>{{ journey.title }}</h2>
+          <h2 class="cedarville-cursive">{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
         <ion-button
@@ -42,7 +42,9 @@ import { cogOutline, pencil } from 'ionicons/icons';
           <ion-icon slot="icon-only" name="cog-outline" color="dark"></ion-icon>
         </ion-button>
       </ion-item>
-      <div class="ion-padding" slot="content">{{ journey.note }}</div>
+      <div class="ion-padding cedarville-cursive" slot="content">
+        {{ journey.note }}
+      </div>
     </ion-accordion>
   `,
 })

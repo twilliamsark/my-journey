@@ -1,5 +1,6 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
 
 /** Ionic CSS Variables **/
 :root {
@@ -98,6 +99,15 @@
   --ion-color-blanchedalmond-contrast-rgb: 0, 0, 0;
   --ion-color-blanchedalmond-shade: #e0cfb4;
   --ion-color-blanchedalmond-tint: #ffedd2;
+
+  /** cedarville-cursive-regular **/
+  --ion-font-family-cedarville-cursive: "Cedarville Cursive", cursive;
+  --ion-font-weight-cedarville-cursive: 400;
+  --ion-font-style-cedarville-cursive: normal;
+}
+
+.cedarville-cursive {
+  font-family: var(--ion-font-family-cedarville-cursive);
 }
 
 .ion-color-rose {
