@@ -39,13 +39,17 @@ import { cogOutline, pencil } from 'ionicons/icons';
           <h2 class="list-font">{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
-        <ion-button
-          fill="clear"
-          slot="end"
-          (click)="$event.stopPropagation(); $event.preventDefault(); onEdit()"
-        >
-          <ion-icon slot="icon-only" name="cog-outline" color="dark"></ion-icon>
-        </ion-button>
+        @if (selected) {
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="
+              $event.stopPropagation(); $event.preventDefault(); onEdit()
+            "
+          >
+            <ion-icon slot="icon-only" name="cog-outline" color="dark" />
+          </ion-button>
+        }
       </ion-item>
       <div class="ion-padding list-font" slot="content">
         {{ journey.note }}
@@ -55,6 +59,7 @@ import { cogOutline, pencil } from 'ionicons/icons';
 })
 export class JourneyListItemComponent {
   @Input({ required: true }) journey!: Journey;
+  @Input({ required: true }) selected: boolean = false;
   @Output() edit = new EventEmitter<Journey>();
 
   onEdit() {
