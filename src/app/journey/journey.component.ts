@@ -1,4 +1,6 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -7,16 +9,14 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
-  IonModal,
   IonRouterOutlet,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addCircleOutline } from 'ionicons/icons';
+
 import { JourneyStoryService } from '../shared/services/journey.store.service';
+import { Journey } from '../shared/interfaces/journey';
 import { JourneyListComponent } from './ui/journey-list.component';
-import { AddJourney, Journey } from '../shared/interfaces/journey';
-import { JourneyFormComponent } from './ui/journey-form.component';
-import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-journey',
@@ -29,9 +29,7 @@ import { FormBuilder, Validators } from '@angular/forms';
     IonButtons,
     IonButton,
     IonIcon,
-    IonModal,
     JourneyListComponent,
-    JourneyFormComponent,
   ],
   template: `
     <ion-header>
@@ -53,26 +51,13 @@ import { FormBuilder, Validators } from '@angular/forms';
         [journeys]="service.journeys()"
         (edit)="editJourney($event)"
       ></app-journey-list>
-      <ion-modal
-        [isOpen]="openForm()"
-        [canDismiss]="true"
-        [presentingElement]="routerOutlet.nativeEl"
-        (ionModalDidDismiss)="openForm.set(false)"
-      >
-        <ng-template>
-          <app-journey-form
-            [title]="title()"
-            [journeyForm]="journeyForm"
-            (results)="onSubmit($event)"
-          ></app-journey-form>
-        </ng-template>
-      </ion-modal>
     </ion-content>
   `,
 })
 export class JourneyComponent {
   service = inject(JourneyStoryService);
   routerOutlet = inject(IonRouterOutlet);
+  router = inject(Router);
   openForm = signal<boolean>(false);
   journey = signal<Journey | null>(null);
 
@@ -100,21 +85,10 @@ export class JourneyComponent {
   }
 
   editJourney(journey: Journey) {
-    console.log('Edit Journey');
-    console.log(journey);
-    this.journey.set(journey);
-    this.openForm.set(true);
+    this.router.navigate(['/journey/edit', journey.id]);
   }
 
   newJourney() {
-    this.openForm.set(true);
-    console.log('New Journey');
-  }
-
-  onSubmit(journey: AddJourney) {
-    this.journey.set(null);
-    this.openForm.set(false);
-    console.log(`${this.title()} Journey`);
-    console.log(journey);
+    this.router.navigate(['/journey/edit', '']);
   }
 }

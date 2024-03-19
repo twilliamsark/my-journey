@@ -13,7 +13,7 @@ import { cogOutline, pencil } from 'ionicons/icons';
 
 @Component({
   standalone: true,
-  selector: 'app-journey-item',
+  selector: 'app-journey-list-item',
   imports: [IonAccordion, IonItem, IonLabel, IonIcon, IonButton],
   styles: `
     div[slot='content'] {
@@ -26,12 +26,17 @@ import { cogOutline, pencil } from 'ionicons/icons';
       border-radius: 10px;
       box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
+
+    .list-font {
+      font-size: large;
+      font-weight: bold;
+    }
   `,
   template: `
     <ion-accordion [value]="journey.id">
       <ion-item slot="header" color="blanchedalmond">
         <ion-label>
-          <h2 class="cedarville-cursive">{{ journey.title }}</h2>
+          <h2 class="list-font">{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
         <ion-button
@@ -42,13 +47,13 @@ import { cogOutline, pencil } from 'ionicons/icons';
           <ion-icon slot="icon-only" name="cog-outline" color="dark"></ion-icon>
         </ion-button>
       </ion-item>
-      <div class="ion-padding cedarville-cursive" slot="content">
+      <div class="ion-padding list-font" slot="content">
         {{ journey.note }}
       </div>
     </ion-accordion>
   `,
 })
-export class JourneyItemComponent {
+export class JourneyListItemComponent {
   @Input({ required: true }) journey!: Journey;
   @Output() edit = new EventEmitter<Journey>();
 

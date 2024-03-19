@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular/standalone';
 import { Journey } from 'src/app/shared/interfaces/journey';
-import { JourneyItemComponent } from './journey-item.component';
+import { JourneyListItemComponent } from './journey-list-item.component';
 
 @Component({
   selector: 'app-journey-list',
   standalone: true,
-  imports: [IonAccordionGroup, JourneyItemComponent],
+  imports: [IonAccordionGroup, JourneyListItemComponent],
   styles: ``,
   template: `
     <ion-accordion-group
@@ -15,10 +15,10 @@ import { JourneyItemComponent } from './journey-item.component';
       [value]="journeys[0].id"
     >
       @for (journey of journeys; track journey.id) {
-        <app-journey-item
+        <app-journey-list-item
           [journey]="journey"
           (edit)="editTriggered($event)"
-        ></app-journey-item>
+        />
       }
     </ion-accordion-group>
   `,

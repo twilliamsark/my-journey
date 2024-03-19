@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { AddJourney, Journey } from '../interfaces/journey';
+import { AddJourney, Journey, JourneyId } from '../interfaces/journey';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   Observable,
