@@ -12,7 +12,7 @@ import { JourneyListItemComponent } from './journey-list-item.component';
     <ion-accordion-group
       expand="inset"
       multiple="false"
-      [value]="journeys[0].id"
+      [value]="selectedValue"
       (ionChange)="accordionGroupChange($event)"
     >
       @for (journey of journeys; track journey.id) {
