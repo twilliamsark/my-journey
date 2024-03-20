@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, from, shareReplay } from 'rxjs';
+import { Observable, from, shareReplay } from 'rxjs';
 import { RxCollection, RxDatabase, RxDocument, createRxDatabase } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 

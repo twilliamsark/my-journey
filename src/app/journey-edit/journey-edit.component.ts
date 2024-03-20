@@ -65,11 +65,6 @@ export class JourneyEditComponent {
             title: journey.title,
             note: journey.note,
           });
-
-          // this.journeyToBeEdited.set({
-          //   id: this.journeyId(),
-          //   data: { title: journey.title, note: journey.note },
-          // });
         }
       }
       this.isModalOpen = true;
@@ -78,10 +73,18 @@ export class JourneyEditComponent {
 
   onClose(journey: AddJourney | null) {
     if (journey) {
-      console.log({
+      const journeyToEdit = {
         id: this.journeyId(),
         data: { title: journey.title, note: journey.note },
-      });
+      };
+
+      console.log(journeyToEdit);
+
+      if (this.newJourney()) {
+        this.service.add$.next(journey);
+      } else {
+        this.service.edit$.next(journeyToEdit);
+      }
     }
     this.modal.dismiss();
     this.router.navigate(['/']);
