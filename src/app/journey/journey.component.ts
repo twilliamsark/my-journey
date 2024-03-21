@@ -14,7 +14,7 @@ import {
 import { addIcons } from 'ionicons';
 import { addCircleOutline } from 'ionicons/icons';
 
-import { JourneyStoryService } from '../shared/services/journey.store.service';
+import { JourneyStoryService } from '../shared/services/journey/journey.store.service';
 import { Journey } from '../shared/interfaces/journey';
 import { JourneyListComponent } from './ui/journey-list.component';
 

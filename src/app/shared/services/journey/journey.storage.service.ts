@@ -3,7 +3,7 @@ import { Observable, from, shareReplay } from 'rxjs';
 import { RxCollection, RxDatabase, RxDocument, createRxDatabase } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 
-import { Journey, journeysSchema } from '../interfaces/journey';
+import { Journey, journeysSchema } from '../../interfaces/journey';
 
 type JourneyCollection = RxCollection<Journey>;
 type JourneyDatabaseCollection = {

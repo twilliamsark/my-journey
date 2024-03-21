@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { AddJourney, EditJourney, Journey } from '../interfaces/journey';
+import { AddJourney, EditJourney, Journey } from '../../interfaces/journey';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   Observable,
@@ -30,12 +30,12 @@ export class JourneyStoryService {
   journeys = computed(() => this.state().journeys);
   error = computed(() => this.state().error);
 
+  add$ = new Subject<AddJourney>();
+  edit$ = new Subject<EditJourney>();
+
   private journeys$: Observable<JourneyDocument[]> = this.storage.db$.pipe(
     switchMap((db) => db.journeys.find().$),
   );
-
-  add$ = new Subject<AddJourney>();
-  edit$ = new Subject<EditJourney>();
 
   constructor() {
     this.journeys$

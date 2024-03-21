@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular/standalone';
 
 import { isEmptyString } from '../shared/utils';
-import { JourneyStoryService } from '../shared/services/journey.store.service';
+import { JourneyStoryService } from '../shared/services/journey/journey.store.service';
 import { AddJourney, EditJourney } from '../shared/interfaces/journey';
 import { JourneyEditFormComponent } from './ui/journey-edit-form.component';
 
