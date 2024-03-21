@@ -15,6 +15,7 @@ export class SettingsStorageService {
   private storage$ = from(this.ionicStorage.create()).pipe(shareReplay(1));
 
   private orderLoaded = false;
+  private queryLoaded = false;
 
   loadOrder$: Observable<SettingsOrderType> = this.storage$.pipe(
     switchMap((storage) => from(storage.get(`${STORAGE_PREFIX}order`))),
@@ -31,6 +32,20 @@ export class SettingsStorageService {
     if (this.orderLoaded) {
       this.storage$.pipe(take(1)).subscribe((storage) => {
         storage.set(`${STORAGE_PREFIX}order`, JSON.stringify(order));
+      });
+    }
+  }
+
+  loadQuery$: Observable<string> = this.storage$.pipe(
+    switchMap((storage) => from(storage.get(`${STORAGE_PREFIX}query`))),
+    tap(() => (this.queryLoaded = true)),
+    shareReplay(1),
+  );
+
+  saveQuery(query: string) {
+    if (this.queryLoaded) {
+      this.storage$.pipe(take(1)).subscribe((storage) => {
+        storage.set(`${STORAGE_PREFIX}query`, query);
       });
     }
   }

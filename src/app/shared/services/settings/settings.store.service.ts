@@ -12,7 +12,7 @@ import {
 export class SettingsStoreService {
   private storage = inject(SettingsStorageService);
 
-  private state = signal<SettingsState>({
+  public state = signal<SettingsState>({
     searchDate: null,
     query: ``,
     order: SETTINGS_ORDER_VALUES[1],
@@ -20,15 +20,23 @@ export class SettingsStoreService {
 
   private stateLoaded = signal<{
     orderLoaded: boolean;
+    queryLoaded: boolean;
   }>({
     orderLoaded: false,
+    queryLoaded: false,
   });
 
   order = computed(() => this.state().order);
   orderLoaded = computed(() => this.stateLoaded().orderLoaded);
 
+  query = computed(() => this.state().query);
+  queryLoaded = computed(() => this.stateLoaded().queryLoaded);
+
   newOrder$ = new Subject<SettingsOrderType>();
   private order$ = this.storage.loadOrder$;
+
+  newQuery$ = new Subject<string>();
+  private query$ = this.storage.loadQuery$;
 
   constructor() {
     this.order$.pipe(takeUntilDestroyed()).subscribe({
@@ -56,6 +64,31 @@ export class SettingsStoreService {
       },
     });
 
+    this.query$.pipe(takeUntilDestroyed()).subscribe({
+      next: (query) => {
+        this.state.update((state) => ({
+          ...state,
+          query,
+        }));
+        this.stateLoaded.update((stateLoaded) => ({
+          ...stateLoaded,
+          queryLoaded: true,
+        }));
+      },
+      error: (err) => {
+        this.state.update((state) => ({
+          ...state,
+        }));
+        this.stateLoaded.update((stateLoaded) => ({
+          ...stateLoaded,
+          queryLoaded: false,
+        }));
+        // TODO: Add 'error' to SettingsState
+        console.error(err);
+        console.error('loadQuery$ ', this.state());
+      },
+    });
+
     this.newOrder$.pipe(takeUntilDestroyed()).subscribe((order) => {
       this.state.update((state) => ({
         ...state,
@@ -63,9 +96,20 @@ export class SettingsStoreService {
       }));
     });
 
+    this.newQuery$.pipe(takeUntilDestroyed()).subscribe((query) => {
+      this.state.update((state) => ({
+        ...state,
+        query,
+      }));
+    });
+
     effect(() => {
       if (this.orderLoaded()) {
         this.storage.saveOrder(this.order());
+      }
+
+      if (this.queryLoaded()) {
+        this.storage.saveQuery(this.query());
       }
     });
   }

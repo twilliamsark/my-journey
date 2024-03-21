@@ -73,16 +73,13 @@ export class JourneyEditComponent {
 
   onClose(journey: AddJourney | null) {
     if (journey) {
-      const journeyToEdit = {
-        id: this.journeyId(),
-        data: { title: journey.title, note: journey.note },
-      };
-
-      console.log(journeyToEdit);
-
       if (this.newJourney()) {
         this.service.add$.next(journey);
       } else {
+        const journeyToEdit = {
+          id: this.journeyId(),
+          data: { title: journey.title, note: journey.note },
+        };
         this.service.edit$.next(journeyToEdit);
       }
     }
