@@ -1,5 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   IonHeader,
@@ -12,7 +11,7 @@ import {
   IonRouterOutlet,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { addCircleOutline } from 'ionicons/icons';
+import { addCircleOutline, searchOutline } from 'ionicons/icons';
 
 import { JourneyStoryService } from '../shared/services/journey/journey.store.service';
 import { Journey } from '../shared/interfaces/journey';
@@ -38,6 +37,13 @@ import { JourneyListComponent } from './ui/journey-list.component';
         <ion-buttons slot="end">
           <ion-button
             (click)="
+              $event.stopPropagation(); $event.preventDefault(); newFilter()
+            "
+          >
+            <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button
+            (click)="
               $event.stopPropagation(); $event.preventDefault(); newJourney()
             "
           >
@@ -61,27 +67,11 @@ export class JourneyComponent {
   openForm = signal<boolean>(false);
   journey = signal<Journey | null>(null);
 
-  private fb = inject(FormBuilder);
-  journeyForm = this.fb.nonNullable.group({
-    title: ['', Validators.required],
-    note: [''],
-  });
-
   edit = computed(() => !!this.journey());
   title = computed(() => (this.edit() ? 'Edit' : 'New'));
 
   constructor() {
-    addIcons({ addCircleOutline });
-    effect(() => {
-      const journey = this.journey();
-
-      if (journey) {
-        this.journeyForm.patchValue({
-          title: journey.title,
-          note: journey.note,
-        });
-      }
-    });
+    addIcons({ addCircleOutline, searchOutline });
   }
 
   editJourney(journey: Journey) {
@@ -90,5 +80,9 @@ export class JourneyComponent {
 
   newJourney() {
     this.router.navigate(['/journey/edit', '']);
+  }
+
+  newFilter() {
+    this.router.navigate(['/filter']);
   }
 }

@@ -33,9 +33,9 @@ import { JourneyEditFormComponent } from './ui/journey-edit-form.component';
 })
 export class JourneyEditComponent {
   @ViewChild(IonModal) modal!: IonModal;
-  service = inject(JourneyStoryService);
-  router = inject(Router);
   isModalOpen = false;
+  private service = inject(JourneyStoryService);
+  private router = inject(Router);
 
   journeyId = signal<string>('');
   @Input() set id(value: string) {

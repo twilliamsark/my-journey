@@ -3,7 +3,7 @@ export type SettingsOrderTypes = typeof SETTINGS_ORDER_VALUES;
 export type SettingsOrderType = SettingsOrderTypes[number];
 
 export type SettingsState = {
-  searchDate: { from: string; to: string } | null;
+  // searchDate: { from: string; to: string } | null;
   query: string;
   order: SettingsOrderType;
 };

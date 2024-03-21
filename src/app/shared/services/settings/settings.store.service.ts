@@ -13,7 +13,7 @@ export class SettingsStoreService {
   private storage = inject(SettingsStorageService);
 
   public state = signal<SettingsState>({
-    searchDate: null,
+    // searchDate: null,
     query: ``,
     order: SETTINGS_ORDER_VALUES[1],
   });

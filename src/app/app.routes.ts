@@ -14,6 +14,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'filter',
+    loadComponent: () =>
+      import('./filter/filter.component').then((m) => m.FilterComponent),
+  },
+  {
     path: '',
     redirectTo: 'journey',
     pathMatch: 'full',
