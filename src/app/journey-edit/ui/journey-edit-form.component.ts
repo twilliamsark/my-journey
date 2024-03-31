@@ -69,6 +69,8 @@ import { AddJourney } from 'src/app/shared/interfaces/journey';
           fill="solid"
           formControlName="title"
           mode="md"
+          autocomplete="true"
+          spellcheck="true"
         ></ion-input>
         <br />
         <ion-textarea
@@ -78,6 +80,8 @@ import { AddJourney } from 'src/app/shared/interfaces/journey';
           [autoGrow]="true"
           formControlName="note"
           mode="md"
+          autocomplete="true"
+          spellcheck="true"
         ></ion-textarea>
       </form>
     </ion-content>
