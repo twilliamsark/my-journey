@@ -6,6 +6,7 @@ import {
   IonButton,
   IonLabel,
   IonIcon,
+  IonTextarea,
 } from '@ionic/angular/standalone';
 import { formatDate } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -14,7 +15,7 @@ import { cogOutline, pencil } from 'ionicons/icons';
 @Component({
   standalone: true,
   selector: 'app-journey-list-item',
-  imports: [IonAccordion, IonItem, IonLabel, IonIcon, IonButton],
+  imports: [IonAccordion, IonItem, IonLabel, IonIcon, IonButton, IonTextarea],
   styles: `
     div[slot='content'] {
       color: var(--ion-color-blanchedalmond-contrast);
@@ -27,16 +28,21 @@ import { cogOutline, pencil } from 'ionicons/icons';
       box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
 
-    .list-font {
+    .journey-title {
       font-size: large;
       font-weight: bold;
+    }
+
+    .journey-note {
+      font-size: large;
+      white-space: pre-wrap;
     }
   `,
   template: `
     <ion-accordion [value]="journey.id">
       <ion-item slot="header" color="blanchedalmond">
         <ion-label>
-          <h2 class="list-font">{{ journey.title }}</h2>
+          <h2 class="journey-title">{{ journey.title }}</h2>
           <p>{{ createdOn(journey) }}</p>
         </ion-label>
         @if (selected) {
@@ -51,8 +57,8 @@ import { cogOutline, pencil } from 'ionicons/icons';
           </ion-button>
         }
       </ion-item>
-      <div class="ion-padding list-font" slot="content">
-        {{ journey.note }}
+      <div class="ion-padding journey-note" slot="content">
+        <ion-textarea readonly="true">{{ journey.note }}</ion-textarea>
       </div>
     </ion-accordion>
   `,
