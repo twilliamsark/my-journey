@@ -16,7 +16,12 @@ import {
   IonSelectOption,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { saveOutline, refreshOutline, close } from 'ionicons/icons';
+import {
+  saveOutline,
+  searchOutline,
+  refreshOutline,
+  close,
+} from 'ionicons/icons';
 import {
   SettingsState,
   SETTINGS_ORDER_VALUES,
@@ -68,13 +73,14 @@ import {
     <ion-content class="ion-padding" color="burlywood">
       <form [formGroup]="filterForm">
         <ion-input
-          label="Query"
-          labelPlacement="floating"
           type="text"
           fill="solid"
           formControlName="query"
           mode="md"
-        ></ion-input>
+          [clearInput]="true"
+        >
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+        </ion-input>
         <br />
         <ion-select
           label="Display Order"
@@ -99,7 +105,7 @@ export class FilterFormComponent {
   @Output() filter = new EventEmitter<SettingsState | null>();
 
   constructor() {
-    addIcons({ saveOutline, refreshOutline, close });
+    addIcons({ saveOutline, searchOutline, refreshOutline, close });
   }
 
   onResetClick() {
